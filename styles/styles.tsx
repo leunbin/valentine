@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#ffffff',
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
 
   topImageContainer:{
@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
     top: 60,
     left: 0,
     right: 0,
-    height: 300,
+    height: 150,
     alignItems: 'center',
     overflow: 'hidden'
   },

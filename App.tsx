@@ -17,6 +17,20 @@ export default function App() {
   const [textValue, onChangeText] = useState('');
   const [isLogin, setIsLogin] = useState(false);
   const [hintVisible, setHintVisible] = useState(false);
+  const [webHeight, setWebHeight] = useState<number | null>(null);
+
+  useEffect(() => {
+    if(Platform.OS === 'web'){
+      const updateHeight = () => {
+        setWebHeight(window.innerHeight);
+      };
+
+      updateHeight();
+      window.addEventListener('resize', updateHeight);
+
+      return () => window.removeEventListener('resize', updateHeight);
+    }
+  }, []);
 
   useEffect(() => {
     if(textValue === '0403'){
@@ -58,7 +72,11 @@ export default function App() {
 
 
   return (
-      <View style={styles.container}>
+      <View 
+        style={[
+          styles.container,
+          Platform.OS === 'web' && webHeight ? {height : webHeight} : null
+        ]}>
         <View style={styles.topImageContainer}>
           <Image
             source={require('./assets/defaultimg.jpg')}
