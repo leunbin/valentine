@@ -184,5 +184,40 @@ export const styles = StyleSheet.create({
     fontStyle: 'italic',
     textAlign: 'center',
     marginBottom: 12,
+  },
+
+  badgeContainer: {
+    position: 'absolute',
+    top: 50, // 상태바 아래 적절한 위치
+    right: 20,
+    width: 50,
+    height: 50,
+    borderRadius: 30,
+    borderWidth: 2,
+    borderColor: '#c8c8c8',
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 1000
+  },
+
+  notificationDot: {
+    position: 'absolute',
+    top: -5,
+    right: -5,
+    backgroundColor: 'red',
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#c8c8c8',
+  },
+
+  dotText: {
+    color: 'white',
+    fontSize: 12,
+    fontWeight: 'bold',
   }
 });
