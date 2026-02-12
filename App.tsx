@@ -1,9 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
-import { Text, Pressable, View, Image, Modal, Platform } from 'react-native';
+import { Text, Pressable, View, Image, Modal, Platform, ImageBackground } from 'react-native';
 import { styles } from './styles/styles';
 import { useFonts } from 'expo-font';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import LoveScreen from './screens/LoveScreen';
+import Login from './screens/Login';
 
 
 export default function App() {
@@ -12,6 +13,16 @@ export default function App() {
   })
   const [modalVisible, setModalVisible] = useState(false);
   const [accepted, setAccepted] = useState(false);
+  const [isFalse, setIsFalse] = useState(false);
+  const [textValue, onChangeText] = useState('');
+  const [isLogin, setIsLogin] = useState(false);
+  const [hintVisible, setHintVisible] = useState(false);
+
+  useEffect(() => {
+    if(textValue === '0403'){
+      setIsLogin(true);
+    }
+  }, [textValue])
 
   const playErrorSound = async () => {
     if(Platform.OS === 'web'){
@@ -30,55 +41,82 @@ export default function App() {
     return null;
   }
 
-  if(accepted) {
-    return <LoveScreen setAccepted={setAccepted}/>
+  if(!isLogin) {
+    return(
+      <Login 
+        onChangeText={onChangeText} 
+        textValue={textValue} 
+        setHintVisible={setHintVisible}
+        hintVisible={hintVisible}
+      />
+    );
   }
 
+  if(accepted) {
+    return <LoveScreen setAccepted={setAccepted} setIsFalse={setIsFalse} />
+  }
+
+
   return (
-    <View style={styles.container}>
-      <Image
-        source={require('./assets/moltees.gif')}
-        style={styles.image}
-      />
-      <Text style={styles.title}>💖 Would you be my BOYFRIEND? 💖</Text>
+    <ImageBackground
+      style={styles.bgimg}
+      source={require('./assets/defaultbg.png')}
+      resizeMode='cover'
+    >
 
-      <View style={styles.buttonRow}>
-        <Pressable 
-          style={styles.ybutton}
-          onPress={() => setAccepted(true)}>
-          <Text style={styles.buttonText}>Yes</Text>
-        </Pressable>
-      
-        <Pressable 
-          style={styles.nbutton}
-          onPress={async () => {
-            await playErrorSound();
-            setModalVisible(true);
-          }}>
-          <Text style={styles.buttonText}>No</Text>
-        </Pressable>
+      <View style={styles.container}>
+        <Image
+          source={require('./assets/bemybf.gif')}
+          style={styles.image}
+        />
+        <Text style={styles.title}>💖 Would you be my BOYFRIEND? 💖</Text>
 
-        <Modal
-          transparent={true}
-          animationType='fade'
-          visible={modalVisible}
-        >
-          <Pressable
-            style={styles.modalOverlay}
-            onPress={() => setModalVisible(false)}
-          >
-            <View style={styles.modalBox}>
-              <Text style={styles.modalText}>
-                ⚠️ 404 SYSTEMS NOT FOUND
-              </Text>
-              <Text style={styles.subText}>
-                Tap anywhere to close
-              </Text>
-            </View>
+        <View style={styles.buttonRow}>
+          <Pressable 
+            style={styles.ybutton}
+            onPress={() => setAccepted(true)}>
+            <Text style={styles.buttonText}>Yes</Text>
           </Pressable>
-        </Modal>
+
+          {isFalse ? <Pressable 
+            style={styles.ybutton}
+            onPress={() => setAccepted(true)}>
+            <Text style={styles.buttonText}>Yes</Text>
+          </Pressable> : <Pressable 
+            style={styles.nbutton}
+            onPress={async () => {
+              await playErrorSound();
+              setModalVisible(true);
+              setIsFalse(true);
+            }}>
+            <Text style={styles.buttonText}>No</Text>
+          </Pressable>}
+        
+          <Modal
+            transparent={true}
+            animationType='fade'
+            visible={modalVisible}
+          >
+            <Pressable
+              style={styles.modalOverlay}
+              onPress={() => setModalVisible(false)}
+            >
+              <View style={styles.modalBox}>
+                <Text style={styles.modalText}>
+                  🚨 System Warning🚨
+                </Text>
+                <Text style={styles.modalSubText}>
+                  This is option is not supported in this universe.
+                </Text>
+                <Text style={styles.subText}>
+                  Tap anywhere to close
+                </Text>
+              </View>
+            </Pressable>
+          </Modal>
+        </View>
+        <StatusBar style="auto" />
       </View>
-      <StatusBar style="auto" />
-    </View>
+    </ImageBackground>
   );
 }

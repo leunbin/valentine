@@ -3,9 +3,33 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+
+  LoginContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  bgimg:{
+    width: '100%',
+    flex: 1,
+  },
+
+  passwordTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    fontFamily: 'font'
+  },
+
+  hintText:{
+    marginTop: 12,
+    fontSize: 14,
+    color: '#323232',
+    fontStyle: 'italic'
   },
 
   title: {
@@ -46,7 +70,7 @@ export const styles = StyleSheet.create({
 
   modalOverlay: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.6)',
+    backgroundColor: 'rgba(0,0,0,0.6)',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -64,14 +88,19 @@ export const styles = StyleSheet.create({
     marginBottom: 10,
   },
 
+  modalSubText:{
+    fontSize: 15,
+    color:'#3c3c3c',
+    marginBottom: 5
+  },
+
   subText: {
-    fontSize: 14,
+    fontSize: 12,
     color: '#464646'
   },
 
   loveContainer: {
     flex: 1,
-    backgroundColor: '#ffffff',
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden'
@@ -83,8 +112,40 @@ export const styles = StyleSheet.create({
   },
 
   loveText: {
-    fontSize: 40,
+    fontSize: 30,
     fontFamily: 'font',
     marginBottom: 40,
+  },
+
+  loginInput:{
+    width: 160,
+    height: 40,
+    borderColor: '#000000',
+    backgroundColor: '#ffffff',
+    borderWidth: 1,
+    borderRadius: 8,
+    padding: 10,
+    textAlign: 'center',
+    letterSpacing: 5,
+  },
+
+  envelope:{
+    backgroundColor: '#FAEBCD',
+    padding: 24,
+    borderRadius: 20,
+    width: 260,
+    alignItems: 'center',
+  },
+
+  envelopeTitle:{
+    fontSize: 18,
+    marginBottom: 12
+  },
+
+  envelopeText: {
+    fontSize: 16,
+    fontStyle: 'italic',
+    textAlign: 'center',
+    marginBottom: 12,
   }
 });

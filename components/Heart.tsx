@@ -13,6 +13,8 @@ export default function Heart({ delay }: HeartProps) {
 
   const randomX = useRef(Math.random() * (width - 40)).current;
   const size = useRef(Math.random() * 25 + 20).current;
+
+  const durationRef = useRef(3000 + Math.random() * 2000).current;  
   const colors = ['#FF4D6D', '#FF85A1', '#FF99AC', '#FFB3C1'];
   const color = useRef(colors[Math.floor(Math.random() * colors.length)]).current;
 
@@ -31,7 +33,7 @@ export default function Heart({ delay }: HeartProps) {
       if (!isInitial) progress.setValue(0);
 
       const currentVal = (progress as any)._value || 0;
-      const duration = 4000 * (1 - currentVal);
+      const duration = durationRef * (1 - currentVal);
 
       Animated.timing(progress, {
         toValue: 1,
@@ -39,7 +41,8 @@ export default function Heart({ delay }: HeartProps) {
         useNativeDriver: true,
       }).start(({ finished }) => {
         if (finished) {
-          setTimeout(() => runAnimation(false), isInitial ? delay : 0);
+          const nextDelay = isInitial ? delay : Math.random() * 1000;
+          setTimeout(() => runAnimation(false), nextDelay);
         }
       });
     };
