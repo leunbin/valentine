@@ -5,12 +5,28 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#ffffff',
+    overflow: 'hidden'
+  },
+
+  topImageContainer:{
+    position: 'absolute',
+    top: 20,
+    left: 0,
+    right: 0,
+    height: 300,
+    alignItems: 'center'
+  },
+
+  defalutimg: {
+    width: '120%'
   },
 
   LoginContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    overflow: 'hidden'
   },
 
   bgimg:{
@@ -106,13 +122,26 @@ export const styles = StyleSheet.create({
     overflow: 'hidden'
   },
 
+  loveImgTop:{
+    position: 'absolute',
+    top: 20,
+    left: 0,
+    right: 0,
+    height: 300,
+    alignItems: 'center'
+  },
+
+  lovestop: {
+    width: '120%'
+  },
+
   loveGif: {
     width: 200,
     height: 200,
   },
 
   loveText: {
-    fontSize: 30,
+    fontSize: 20,
     fontFamily: 'font',
     marginBottom: 40,
   },

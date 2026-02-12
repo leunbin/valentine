@@ -10,12 +10,13 @@ type LoveScreenProps = {
 
 export default function LoveScreen({ setAccepted, setIsFalse }: LoveScreenProps) {
   return (
-    <ImageBackground
-      style={styles.bgimg}
-      source={require('../assets/lovebg.jpg')}
-      resizeMode='cover'
-    >
     <View style={styles.loveContainer}>
+      <View style={styles.loveImgTop}>
+        <Image 
+          source={require('../assets/lovestop.jpg')}
+          style={styles.lovestop}
+        />
+      </View>
       <FloatingHearts />
       <Image
         source={require('../assets/love.gif')}
@@ -33,6 +34,5 @@ export default function LoveScreen({ setAccepted, setIsFalse }: LoveScreenProps)
           <Text style={styles.buttonText}>Home</Text>
         </Pressable>
     </View>
-    </ImageBackground>
   );
 }

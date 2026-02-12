@@ -58,13 +58,15 @@ export default function App() {
 
 
   return (
-    <ImageBackground
-      style={styles.bgimg}
-      source={require('./assets/defaultbg.png')}
-      resizeMode='cover'
-    >
-
       <View style={styles.container}>
+        <View style={styles.topImageContainer}>
+          <Image
+            source={require('./assets/defaultimg.jpg')}
+            style={styles.defalutimg}
+            resizeMode='contain'
+          />
+        </View>
+        
         <Image
           source={require('./assets/bemybf.gif')}
           style={styles.image}
@@ -117,6 +119,5 @@ export default function App() {
         </View>
         <StatusBar style="auto" />
       </View>
-    </ImageBackground>
   );
 }
