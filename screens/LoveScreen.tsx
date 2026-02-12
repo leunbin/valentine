@@ -17,6 +17,7 @@ export default function LoveScreen({ setAccepted, setIsFalse }: LoveScreenProps)
   const moveX = useRef(new Animated.Value(0)).current;
   const moveY = useRef(new Animated.Value(0)).current;
   const opacity = useRef(new Animated.Value(1)).current;
+  const badgeOpacity = useRef(new Animated.Value(0)).current;
   const badgeScale = useRef(new Animated.Value(0)).current;
 
   const [showBadge, setShowBadge] = useState(false);
@@ -59,12 +60,21 @@ export default function LoveScreen({ setAccepted, setIsFalse }: LoveScreenProps)
     ]).start(() => {
       // 3. 애니메이션 완료 후 뱃지 등장
       setShowBadge(true);
-      Animated.spring(badgeScale, {
-        toValue: 1,
-        friction: 5,
-        useNativeDriver: true,
-      }).start();
-    });
+      Animated.parallel([
+    Animated.spring(badgeScale, {
+      toValue: 1,
+      friction: 4,
+      tension: 40,
+      useNativeDriver: true,
+    }),
+    // 투명도 애니메이션을 추가하면 더 부드럽게 나타납니다.
+    Animated.timing(badgeOpacity, { // badgeOpacity를 useRef로 추가(기본값 0)
+      toValue: 1,
+      duration: 100,
+      useNativeDriver: true,
+    })
+  ]).start();
+});
   }, []);
 
   const handleBadgePress = () => {
@@ -79,7 +89,7 @@ export default function LoveScreen({ setAccepted, setIsFalse }: LoveScreenProps)
   return (
     <View style={styles.loveContainer}>
       {showBadge && (
-        <Animated.View style={[styles.badgeContainer, { transform: [{ scale: badgeScale }] }]}>
+        <Animated.View style={[styles.badgeContainer, { transform: [{ scale: badgeScale }], opacity: badgeOpacity }]}>
           <Pressable onPress={handleBadgePress} style={styles.letter}>
             <Text style={{ fontSize: 25, zIndex:2000 }}>✉️</Text>
             <View style={styles.notificationDot}>
