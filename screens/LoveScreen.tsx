@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { View, Text, Image, Pressable, ImageBackground, Dimensions, Animated } from 'react-native';
+import { View, Text, Image, Pressable, ImageBackground, Dimensions, Animated, StyleSheet } from 'react-native';
 import { styles } from '../styles/styles';
 import FloatingHearts from '../components/FloatingHearts';
 import Envelope from '../components/Envelope';
@@ -20,13 +20,15 @@ export default function LoveScreen({ setAccepted, setIsFalse }: LoveScreenProps)
   const badgeScale = useRef(new Animated.Value(0)).current;
 
   const [showBadge, setShowBadge] = useState(false);
+  const [isLetterVisible, setIsLetterVisible] = useState(false);
+  const letterScale = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     Animated.sequence([
       // 1. 화면 중앙으로 올라오기
       Animated.timing(translateY, {
         toValue: height * 0.05,
-        duration: 1000,
+        duration: 2000,
         useNativeDriver: true,
       }),
       // 잠시 멈춤
@@ -65,14 +67,25 @@ export default function LoveScreen({ setAccepted, setIsFalse }: LoveScreenProps)
     });
   }, []);
 
+  const handleBadgePress = () => {
+    setIsLetterVisible(true);
+    Animated.spring(letterScale, {
+      toValue: 1,
+      friction: 5,
+      useNativeDriver: true,
+    }).start();
+  };
+
   return (
     <View style={styles.loveContainer}>
       {showBadge && (
         <Animated.View style={[styles.badgeContainer, { transform: [{ scale: badgeScale }] }]}>
-          <Text style={{ fontSize: 25 }}>✉️</Text>
-          <View style={styles.notificationDot}>
-            <Text style={styles.dotText}>1</Text>
-          </View>
+          <Pressable onPress={handleBadgePress} style={styles.letter}>
+            <Text style={{ fontSize: 25 }}>✉️</Text>
+            <View style={styles.notificationDot}>
+              <Text style={styles.dotText}>1</Text>
+            </View>
+          </Pressable>
         </Animated.View>
       )}
       <View style={styles.loveImgTop}>
@@ -113,6 +126,39 @@ export default function LoveScreen({ setAccepted, setIsFalse }: LoveScreenProps)
         >
           <Envelope />
         </Animated.View>
+
+{/* 클릭 시 나타나는 편지 모달 */}
+{isLetterVisible && (
+  <View style={[StyleSheet.absoluteFill, styles.modalOverlay, { zIndex: 1999 }]}>
+    <Animated.View 
+      style={[
+        styles.letterPaper, 
+        { transform: [{ scale: letterScale }] }
+      ]}
+    >
+      {/* 1. 편지 이미지로 꽉 채우기 */}
+      <Image 
+        source={require('../assets/letter.png')} 
+        style={styles.letterImage}
+        resizeMode="stretch" // 이미지를 컨테이너에 꽉 맞춤
+      />
+
+      {/* 2. 우측 상단 동그라미 X 버튼 */}
+      <Pressable 
+        onPress={() => {
+          Animated.timing(letterScale, {
+            toValue: 0,
+            duration: 200,
+            useNativeDriver: true,
+          }).start(() => setIsLetterVisible(false));
+        }} 
+        style={styles.closeButton}
+      >
+        <Text style={styles.closeButtonText}>✕</Text>
+      </Pressable>
+    </Animated.View>
+  </View>
+)}
     </View>
   );
 }

@@ -1,4 +1,6 @@
-import { Platform, StyleSheet } from 'react-native';
+import { Dimensions, Platform, StyleSheet } from 'react-native';
+
+const {width, height} = Dimensions.get('window');
 
 export const styles = StyleSheet.create({
   container: {
@@ -219,5 +221,57 @@ export const styles = StyleSheet.create({
     color: 'white',
     fontSize: 12,
     fontWeight: 'bold',
+  },
+
+  letter: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    height: '100%',
+  },
+
+  letterPaper: {
+    width: width * 0.9, 
+    height: (width * 0.9) * 0.65, 
+    backgroundColor: 'white',
+    borderRadius: 15,
+    overflow: 'hidden',           // 이미지가 둥근 모서리를 벗어나지 않게 함
+    elevation: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.5
+  },
+
+  letterInner: {
+    width: '100%',
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+
+  closeButton: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    backgroundColor: 'rgba(0,0,0,0.5)', // 반투명 검정 배경
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 2001,
+  },
+
+  letterImage: {
+    width: '100%',
+    height: '100%',
+  },
+
+  closeButtonText: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold',
+    lineHeight: 20,
   }
+
 });
