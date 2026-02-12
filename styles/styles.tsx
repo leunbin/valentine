@@ -2,11 +2,11 @@ import { Platform, StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
+    // position: 'absolute',
+    // top: 0,
+    // left: 0,
+    // right: 0,
+    // bottom: 0,
 
     flex: 1,
     justifyContent: 'center',
@@ -17,7 +17,7 @@ export const styles = StyleSheet.create({
 
   topImageContainer:{
     position: 'absolute',
-    top: 20,
+    top: 60,
     left: 0,
     right: 0,
     height: 300,
