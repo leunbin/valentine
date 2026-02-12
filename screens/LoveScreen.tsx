@@ -81,7 +81,7 @@ export default function LoveScreen({ setAccepted, setIsFalse }: LoveScreenProps)
       {showBadge && (
         <Animated.View style={[styles.badgeContainer, { transform: [{ scale: badgeScale }] }]}>
           <Pressable onPress={handleBadgePress} style={styles.letter}>
-            <Text style={{ fontSize: 25 }}>✉️</Text>
+            <Text style={{ fontSize: 25, zIndex:1000 }}>✉️</Text>
             <View style={styles.notificationDot}>
               <Text style={styles.dotText}>1</Text>
             </View>
