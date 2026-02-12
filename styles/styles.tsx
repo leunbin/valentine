@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {
@@ -7,9 +7,6 @@ export const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-
-    width: '100%',
-    height: '100%',
 
     flex: 1,
     justifyContent: 'center',
@@ -66,8 +63,8 @@ export const styles = StyleSheet.create({
   },
 
   image: {
-    width: 150,
-    height: 150,
+    width: 120,
+    height: 120,
   },
   
   buttonRow: {
