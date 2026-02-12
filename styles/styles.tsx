@@ -15,7 +15,8 @@ export const styles = StyleSheet.create({
     left: 0,
     right: 0,
     height: 300,
-    alignItems: 'center'
+    alignItems: 'center',
+    overflow: 'hidden'
   },
 
   defalutimg: {
@@ -128,7 +129,8 @@ export const styles = StyleSheet.create({
     left: 0,
     right: 0,
     height: 300,
-    alignItems: 'center'
+    alignItems: 'center',
+    overflow: 'hidden'
   },
 
   lovestop: {
